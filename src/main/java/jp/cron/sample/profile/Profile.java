@@ -12,5 +12,4 @@ public class Profile {
     public String mongoDbName;
     public Boolean isSsl = false;
 
-
 }

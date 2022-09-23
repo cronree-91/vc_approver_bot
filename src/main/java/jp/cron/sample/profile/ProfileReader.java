@@ -19,12 +19,7 @@ public class ProfileReader {
 
     @Bean
     public Profile profile() throws FileNotFoundException {
-        String profileName = System.getenv("PROFILE_NAME");
-        if (profileName==null || profileName.equals("ENV")) {
-            return loadFromEnv();
-        } else {
-            return loadFromFile(profileName);
-        }
+        return loadFromFile("default");
     }
 
     @Autowired

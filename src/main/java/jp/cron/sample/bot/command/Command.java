@@ -23,6 +23,7 @@ public abstract class Command extends SlashCommand {
         try {
             process(event, new CommandReplier(event.getHook(), null));
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
