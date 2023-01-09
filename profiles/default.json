@@ -7,5 +7,6 @@
   "botInvite": "",
   "mongoDbName": "development_vc_approver",
   "mongoDbUri": "mongodb://localhost:27017",
-  "isSsl": false
+  "isSsl": false,
+  "applyChannel": "972350589746962462"
 }

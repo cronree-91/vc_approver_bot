@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class VoiceChannelCommand extends Command {
 
@@ -18,9 +20,10 @@ public class VoiceChannelCommand extends Command {
     public VoiceChannelCommand(Profile profile, VoiceChannelRepository repository) {
         super(profile, "vc", "vc");
         this.ownerCommand = true;
+        this.children = new Command[]{
                 new VoiceChannelAddCommand(profile, repository),
-                new VoiceChannelRemoveCommand(profile, repository),
-                new VoiceChannelListCommand(profile, repository)
+                new VoiceChannelListCommand(profile, repository),
+                new VoiceChannelRemoveCommand(profile, repository)
         };
     }
 

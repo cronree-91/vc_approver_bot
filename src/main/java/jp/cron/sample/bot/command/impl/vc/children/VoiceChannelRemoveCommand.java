@@ -21,19 +21,14 @@ public class VoiceChannelRemoveCommand extends Command {
         this.repo = repo;
 
         this.options = new ArrayList<>();
-        this.options.add(new OptionData(OptionType.CHANNEL, "channel", "ボイスチャンネル", true));
+        this.options.add(new OptionData(OptionType.STRING, "channel", "ボイスチャンネルID", true));
     }
 
     @Override
     protected void process(SlashCommandEvent event, CommandReplier replier) {
-        GuildChannel ch = event.getOption("channel").getAsGuildChannel();
-        if (!(ch instanceof VoiceChannel)) {
-            replier.reply("ボイスチャンネルを指定してください。");
-            return;
-        }
-        VoiceChannel vc = (VoiceChannel) ch;
+        String rawChId = event.getOption("channel").getAsString();
 
-        repo.deleteById(vc.getId());
+        repo.deleteById(rawChId);
 
         replier.reply(":o: 削除しました。");
 

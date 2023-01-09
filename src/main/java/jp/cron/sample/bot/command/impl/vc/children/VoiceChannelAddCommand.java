@@ -43,7 +43,6 @@ public class VoiceChannelAddCommand extends Command {
             return;
         }
 
-
         String name = event.getOption("name").getAsString();
 
         VoiceChannelEntity entity = new VoiceChannelEntity();

@@ -2,14 +2,17 @@ package jp.cron.sample.bot;
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.vdurmont.emoji.EmojiParser;
 import jp.cron.sample.bot.command.Command;
 import jp.cron.sample.bot.command.CommandManager;
 import jp.cron.sample.profile.Profile;
 import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +30,9 @@ public class Bot {
     @Autowired
     Listener listener;
 
+    @Autowired
+    EventWaiter waiter;
+
     public Bot() {
     }
 
@@ -37,6 +43,7 @@ public class Bot {
         JDA jda = jdaBuilder()
                 .addEventListeners(client)
                 .addEventListeners(listener)
+                .addEventListeners(waiter)
                 .build();
     }
 
@@ -44,9 +51,7 @@ public class Bot {
         return new CommandClientBuilder()
                 .setPrefix(profile.prefix)
                 .setOwnerId(profile.ownerId)
-                .setCoOwnerIds(profile.coOwnersId)
                 .setEmojis(EmojiParser.parseToUnicode("o"), null, EmojiParser.parseToUnicode("x"))
-                .setServerInvite(profile.serverInvite)
                 .setStatus(OnlineStatus.ONLINE)
                 .addCommands(commandManager.getCommands().toArray(new Command[0]))
                 .addSlashCommands(commandManager.getCommands().toArray(new Command[0]))
