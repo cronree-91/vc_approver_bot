@@ -97,6 +97,15 @@ public class JoinCommand extends Command {
         TextChannel applyCh = member.getGuild().getTextChannelById(profile.applyChannel);
 
         MessageBuilder mb = new MessageBuilder();
+        mb.setContent("");
+
+        mb.append("<@").append(profile.ownerId).append(">");
+
+        for (String s : profile.coOwnersId) {
+            mb.append("<@").append(s).append(">");
+        }
+
+
 
         EmbedBuilder eb = new EmbedBuilder();
 
