@@ -51,6 +51,7 @@ public class Bot {
         return new CommandClientBuilder()
                 .setPrefix(profile.prefix)
                 .setOwnerId(profile.ownerId)
+                .setCoOwnerIds(profile.coOwnersId)
                 .setEmojis(EmojiParser.parseToUnicode("o"), null, EmojiParser.parseToUnicode("x"))
                 .setStatus(OnlineStatus.ONLINE)
                 .addCommands(commandManager.getCommands().toArray(new Command[0]))
